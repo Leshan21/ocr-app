@@ -124,7 +124,7 @@ Be concise and helpful.`
           "Please extract key information (names, dates, numbers, etc.) from this text.",
         questions: "What are the main points or questions this text addresses?",
         research_report:
-          "Write a full research report between 20 and 24 pages based on this text. Include properly formatted references. Ensure the writing sounds humanized and student-friendly. Keep passive voice usage low and clearly point out any passive voice sentences with active-voice alternatives.",
+          "Write a full research report based on this text with a target length of 6,000 to 7,200 words (roughly 20 to 24 pages in standard formatting). Include properly formatted references. Ensure the writing sounds humanized and student-friendly. Keep passive voice usage low and clearly point out any passive voice sentences with active-voice alternatives.",
       };
 
       const message = actions[action];

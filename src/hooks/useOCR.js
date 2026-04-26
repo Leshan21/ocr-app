@@ -83,13 +83,15 @@ export const useOCR = () => {
 
     try {
       const paragraphs = text.split(/\r?\n/).map((line) =>
-        new Paragraph({
-          children: [
-            new TextRun({
-              text: line || " ",
-            }),
-          ],
-        }),
+        line
+          ? new Paragraph({
+              children: [
+                new TextRun({
+                  text: line,
+                }),
+              ],
+            })
+          : new Paragraph({}),
       );
 
       const doc = new Document({
