@@ -19,7 +19,7 @@ const TextResult = ({ text, onDownload }) => {
           onClick={onDownload}
           className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-500"
         >
-          Download .doc
+          Download .docx
         </button>
       </div>
       <pre className="mt-4 max-h-[420px] overflow-auto rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left text-sm leading-6 text-slate-700 whitespace-pre-wrap">

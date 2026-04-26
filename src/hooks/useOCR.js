@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import Tesseract from "tesseract.js";
+import { Document, Packer, Paragraph, TextRun } from "docx";
 
 /**
  * Custom hook for OCR functionality
@@ -75,26 +76,35 @@ export const useOCR = () => {
   }, [text]);
 
   /**
-   * Download extracted text as a .doc file
+   * Download extracted text as a .docx file
    */
-  const downloadAsDoc = useCallback(() => {
+  const downloadAsDoc = useCallback(async () => {
     if (!text) return false;
 
     try {
-      const escapedText = text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/\n/g, "<br>");
+      const paragraphs = text.split(/\r?\n/).map((line) =>
+        new Paragraph({
+          children: [
+            new TextRun({
+              text: line || " ",
+            }),
+          ],
+        }),
+      );
 
-      const htmlDoc = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>OCR Text</title></head><body>${escapedText}</body></html>`;
-      const blob = new Blob([htmlDoc], {
-        type: "application/msword;charset=utf-8",
+      const doc = new Document({
+        sections: [
+          {
+            children: paragraphs,
+          },
+        ],
       });
+
+      const blob = await Packer.toBlob(doc);
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `ocr-text-${Date.now()}.doc`;
+      link.download = `ocr-text-${Date.now()}.docx`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

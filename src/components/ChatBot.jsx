@@ -34,6 +34,7 @@ export function ChatBot({ text, chat }) {
     { id: "fix_errors", label: "🔧 Fix Errors" },
     { id: "explain", label: "💡 Explain" },
     { id: "extract_info", label: "📋 Extract Info" },
+    { id: "research_report", label: "📚 Research Report" },
   ];
 
   return (
